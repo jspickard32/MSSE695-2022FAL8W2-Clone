@@ -123,12 +123,23 @@ https://www.namecheap.com/support/knowledgebase/article.aspx/9821/38/apache-redi
 1. If necessary, delete the git repo dir, stop and remove all containers, then restart from step 2 in the instructions.
 ```shell
 # Ubuntu Server 18.04.6 LTS 64-bit
-# Fedora 37 Server x86_64 
+# Fedora 37 Server x86_64
+## Docker containers
 sudo docker stop $(sudo docker ps -a -q)    # stop all containers
 sudo docker rm $(sudo docker ps -a -q)    # remove all containers
+```
+```shell
+## git local clone
 sudo rm -r /home/nextcloud/mygit/MSSE695-2022FAL8W2    # delete copied git dir
+```
+```shell
+## Docker images
 sudo docker image prune -a -f    # remove all images
-sudo rm -R /home/nextcloud/datadb # !!!WARNING!!! Deletes Volume content! (i.e.: user stored cloud files). Only run when needed to delete admin account and redo setup, delete/rename datadb and data dirs from Step 1
+```
+```shell
+## Volumes
+# !!!WARNING!!! Deletes Volume content! Only do this if not trying to preserve data yet!!! (i.e.: troubleshooting initial setup)
+sudo rm -R /home/nextcloud/datadb # !!!WARNING!!! Deletes Volume content! (i.e.: user stored database schema). Only run when needed to delete admin account and redo setup, delete/rename datadb and data dirs from Step 1
 sudo rm -R /home/nextcloud/data # !!!WARNING!!! Deletes Volume content! (i.e.: user stored cloud files). Only run when needed to delete admin account and redo setup, delete/rename datadb and data dirs from Step 1
 ```
 
