@@ -59,10 +59,11 @@ dnf install git-all
 - These directories store the files (data) and user info (datadb).  
 ```shell
 # Ubuntu Server 18.04.6 LTS 64-bit
-# Fedora 37 Server x86_64 
-sudo mkdir -p /home/nextcloud/mygit
-sudo chmod 755 -R /home/nextcloud
-export cloudDir="/home/nextcloud"
+# Fedora 37 Server x86_64
+#export cloudDir="/home/nextcloud"    #orig local dir
+#export cloudDir="/media/CloudDrive"    #mounted drive dir
+export cloudDir="/media/CloudDrive2025"    #new mounted drive dir
+sudo mkdir -p ${cloudDir}/mygit
 sudo mkdir -p ${cloudDir}/data
 sudo mkdir -p ${cloudDir}/datadb
 sudo chmod 775 -R ${cloudDir}
@@ -74,8 +75,8 @@ sudo chmod 775 -R ${cloudDir}
 ```shell
 # Ubuntu Server 18.04.6 LTS 64-bit
 # Fedora 37 Server x86_64 
-cd /home/nextcloud/mygit
-sudo git clone https://github.com/jspickard/MSSE695-2022FAL8W2.git
+cd ${cloudDir}/mygit
+sudo git clone https://github.com/jspickard32/MSSE695-2022FAL8W2-Clone.git
 
 
 ```
@@ -83,14 +84,14 @@ sudo git clone https://github.com/jspickard/MSSE695-2022FAL8W2.git
 ```shell
 # Ubuntu Server 18.04.6 LTS 64-bit
 # Fedora 37 Server x86_64 
-sudo chmod 700 /home/nextcloud/mygit/MSSE695-2022FAL8W2/nextcloud-js/dockerfile/nextcloud-ssl-js.sh
+sudo chmod 700 ${cloudDir}/mygit/MSSE695-2022FAL8W2/nextcloud-js/dockerfile/nextcloud-ssl-js.sh
 
 ```
 4. Build docker image.
 ```shell
 # Ubuntu Server 18.04.6 LTS 64-bit
 # Fedora 37 Server x86_64 
-cd /home/nextcloud/mygit/MSSE695-2022FAL8W2/nextcloud-js/dockerfile
+cd ${cloudDir}/mygit/MSSE695-2022FAL8W2/nextcloud-js/dockerfile
 sudo docker build -t nextcloud-js .
 
 ```
@@ -98,8 +99,8 @@ sudo docker build -t nextcloud-js .
 ```shell
 # Ubuntu Server 18.04.6 LTS 64-bit
 # Fedora 37 Server x86_64 
-cd /home/nextcloud/mygit/MSSE695-2022FAL8W2/nextcloud-js/
-sudo docker compose up    # add -d to ignore details
+cd ${cloudDir}/mygit/MSSE695-2022FAL8W2/nextcloud-js/
+sudo docker compose up    # add -d to ignore details, old command was "docker-compose"
 
 ```
 
@@ -130,7 +131,7 @@ sudo docker rm $(sudo docker ps -a -q)    # remove all containers
 ```
 ```shell
 ## git local clone
-sudo rm -r /home/nextcloud/mygit/MSSE695-2022FAL8W2    # delete copied git dir
+sudo rm -r ${cloudDir}/mygit/MSSE695-2022FAL8W2    # delete copied git dir
 ```
 ```shell
 ## Docker images
@@ -139,8 +140,8 @@ sudo docker image prune -a -f    # remove all images
 ```shell
 ## Volumes
 # !!!WARNING!!! Deletes Volume content! Only do this if not trying to preserve data yet!!! (i.e.: troubleshooting initial setup)
-sudo rm -R /home/nextcloud/datadb # !!!WARNING!!! Deletes Volume content! (i.e.: user stored database schema). Only run when needed to delete admin account and redo setup, delete/rename datadb and data dirs from Step 1
-sudo rm -R /home/nextcloud/data # !!!WARNING!!! Deletes Volume content! (i.e.: user stored cloud files). Only run when needed to delete admin account and redo setup, delete/rename datadb and data dirs from Step 1
+#sudo rm -R ${cloudDir}/datadb # !!!WARNING!!! Deletes Volume content! (i.e.: user stored database schema). Only run when needed to delete admin account and redo setup, delete/rename datadb and data dirs from Step 1
+#sudo rm -R ${cloudDir}/data # !!!WARNING!!! Deletes Volume content! (i.e.: user stored cloud files). Only run when needed to delete admin account and redo setup, delete/rename datadb and data dirs from Step 1
 ```
 
 2. If changing IPs is necessary, make changes to file /var/www/html/config/config.php (global IP should be added here too).
