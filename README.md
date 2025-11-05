@@ -7,7 +7,7 @@
 - Due date: 12/11/2022
 
 ## Description
-This repo is being used to aid in the Research and Development (R&D) of containerization by using the NextCloud Free Open Source Software (FOSS) as the main service of installation. This repo adds a self-signed certificate to implement SSL and the https protocol upon application launch to the existing content described in [Reference](https://github.com/jspickard/MSSE695-2022FAL8W2#references) 1.
+This repo is being used to aid in the Research and Development (R&D) of containerization by using the NextCloud Free Open Source Software (FOSS) as the main service of installation. This repo adds a self-signed certificate to implement SSL and the https protocol upon application launch to the existing content described in [Reference](https://github.com/jspickard/MSSE695-2022FAL8W2-Clone#references) 1.
 
 ## What's Required
 - A test computer connected to a local network with an internet browser (i.e.: Windows 10 Home Version 21H2 with Edge 64-bit Version 107.0.1418.52 was used for the main test.)
@@ -84,14 +84,14 @@ sudo git clone https://github.com/jspickard32/MSSE695-2022FAL8W2-Clone.git
 ```shell
 # Ubuntu Server 18.04.6 LTS 64-bit
 # Fedora 37 Server x86_64 
-sudo chmod 700 ${cloudDir}/mygit/MSSE695-2022FAL8W2/nextcloud-js/dockerfile/nextcloud-ssl-js.sh
+sudo chmod 700 ${cloudDir}/mygit/MSSE695-2022FAL8W2-Clone/nextcloud-js/dockerfile/nextcloud-ssl-js.sh
 
 ```
 4. Build docker image.
 ```shell
 # Ubuntu Server 18.04.6 LTS 64-bit
 # Fedora 37 Server x86_64 
-cd ${cloudDir}/mygit/MSSE695-2022FAL8W2/nextcloud-js/dockerfile
+cd ${cloudDir}/mygit/MSSE695-2022FAL8W2-Clone/nextcloud-js/dockerfile
 sudo docker build -t nextcloud-js .
 
 ```
@@ -99,7 +99,7 @@ sudo docker build -t nextcloud-js .
 ```shell
 # Ubuntu Server 18.04.6 LTS 64-bit
 # Fedora 37 Server x86_64 
-cd ${cloudDir}/mygit/MSSE695-2022FAL8W2/nextcloud-js/
+cd ${cloudDir}/mygit/MSSE695-2022FAL8W2-Clone/nextcloud-js/
 sudo docker compose up    # add -d to ignore details, old command was "docker-compose"
 
 ```
@@ -131,7 +131,7 @@ sudo docker rm $(sudo docker ps -a -q)    # remove all containers
 ```
 ```shell
 ## git local clone
-sudo rm -r ${cloudDir}/mygit/MSSE695-2022FAL8W2    # delete copied git dir
+sudo rm -r ${cloudDir}/mygit/MSSE695-2022FAL8W2-Clone    # delete copied git dir
 ```
 ```shell
 ## Docker images
