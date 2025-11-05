@@ -100,7 +100,7 @@ sudo docker build -t nextcloud-js .
 # Ubuntu Server 18.04.6 LTS 64-bit
 # Fedora 37 Server x86_64 
 cd ${cloudDir}/mygit/MSSE695-2022FAL8W2-Clone/nextcloud-js/
-sudo docker compose up    # add -d to ignore details, old command was "docker-compose"
+sudo -E docker compose up    # add -d to ignore details, old command was "docker-compose"
 
 ```
 
