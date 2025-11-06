@@ -1,10 +1,7 @@
 # Custom SSL image build files for NextCloud container
-- Author: James Spickard
 - School: Regis University
 - Class: MSSE695 - Software Engineering Res & Dev
-- Semester: Fall 2022 8 Week 2
-- Professor: Doctor Kevin Pyatt
-- Due date: 12/11/2022
+
 
 ## Description
 This repo is being used to aid in the Research and Development (R&D) of containerization by using the NextCloud Free Open Source Software (FOSS) as the main service of installation. This repo adds a self-signed certificate to implement SSL and the https protocol upon application launch to the existing content described in [Reference](https://github.com/jspickard/MSSE695-2022FAL8W2-Clone#references) 1.
@@ -107,7 +104,7 @@ sudo docker build -t nextcloud-js . --build-arg dockerTag=$dockerTag
 5. Run container from image.
 ```shell
 # exports
-export mariaTag=11.8.3-noble
+export mariaTag=11.8.3-noble   #no later than 11.8 was recommended in the Nextcloud UI for performance
 
 ```
 ```shell
@@ -127,8 +124,17 @@ https://###.###.###.###:8081
 ## Copyright and licensing information.
 The owner of this repo does not own NextCloud; these files are intended to aid in the R&D of containerization only.
 
-## Contact information for the distributor or programmer.
-James Spickard, jspickard@regis.edu
+## Updating
+1. Stop containers
+2. prune images
+3. Change the values of the dockerTag (for nextcloud) and mariaTag as needed
+   1. first update to latest minor version, then update to next major version, then next major version and so on until you're at desired
+   2. recommend getting next version to update from admin Administration Settings page
+5. redeploy (docker build and compose up)
+6. If issues occur, manually calling the upgrade command in the container may be necessary
+   1. sudo docker exec -it -u 33 {containerId} bash    #-u33 goes in as docker admin user www-data
+   2. php occ upgrade
+   3. (can also toggle maintenance mode, disable apps, and call other commands as needed from here)
 
 ## Known bugs/issues.
 1.  The Non-SSL site http://###.###.###.###:8080 was originally disabled for this demonstration, but was re-enabled for experimenting with the buddy CI/CD tool. Recommend disabling port 8080:80 traffic again to keep SSL only. Redirection with containers proved difficult using the existing port route configuration. The following guide should be referenced for information on redirect.
