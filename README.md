@@ -46,10 +46,6 @@ dnf install docker-compose
 ```
 5. Other installations may be required throughout (i.e.: git); install as needed.
 ```shell
-# exports
-export mariaTag=11.8.3-noble
-```
-```shell
 # Fedora 37 Server x86_64 
 dnf install git-all
 
@@ -109,6 +105,11 @@ sudo docker build -t nextcloud-js . --build-arg dockerTag=$dockerTag
 
 ```
 5. Run container from image.
+```shell
+# exports
+export mariaTag=11.8.3-noble
+
+```
 ```shell
 # Ubuntu Server 18.04.6 LTS 64-bit
 # Fedora 37 Server x86_64 
