@@ -62,6 +62,7 @@ dnf install git-all
 #export cloudDir="/home/nextcloud"    #orig local dir
 export cloudDir="/media/CloudDrive/NextCloud"    #mounted drive dir
 #export cloudDir="/media/CloudDrive2025"    #new mounted drive dir
+
 ```
 ```shell
 # Ubuntu Server 18.04.6 LTS 64-bit
@@ -70,6 +71,7 @@ sudo mkdir -p ${cloudDir}/mygit
 sudo mkdir -p ${cloudDir}/data
 sudo mkdir -p ${cloudDir}/datadb
 sudo chmod 775 -R ${cloudDir}
+
 ```
 - Note 1: Other directories can be used (i.e.: if you were to use a seperate drive with a lot of storage); if that is desired, replace those directories here and the volumnes directories in the nextcloud-js/docker-compose.yml file.
 - Note 2: For using external drives (MUST BE ext4, not FAT), the following must be done manually: the drive identified, mount locataion created, mounted to that location, verified, then permanently mounted (recommend verifying through restart). The following site is a useful reference: https://linuxconfig.org/howto-mount-usb-drive-in-linux
@@ -81,7 +83,6 @@ sudo chmod 775 -R ${cloudDir}
 cd ${cloudDir}/mygit
 sudo git clone https://github.com/jspickard32/MSSE695-2022FAL8W2-Clone.git
 
-
 ```
 3. Enter into dockerfile dir and change permissions on dependent script.
 ```shell
@@ -92,10 +93,15 @@ sudo chmod 700 ${cloudDir}/mygit/MSSE695-2022FAL8W2-Clone/nextcloud-js/dockerfil
 ```
 4. Build docker image.
 ```shell
+# exports
+export dockerTag=31.0.10-apache
+
+```
+```shell
 # Ubuntu Server 18.04.6 LTS 64-bit
 # Fedora 37 Server x86_64 
 cd ${cloudDir}/mygit/MSSE695-2022FAL8W2-Clone/nextcloud-js/dockerfile
-sudo docker build -t nextcloud-js .
+sudo docker build -t nextcloud-js . --build-arg dockerTag=$dockerTag
 
 ```
 5. Run container from image.
@@ -131,20 +137,24 @@ https://www.namecheap.com/support/knowledgebase/article.aspx/9821/38/apache-redi
 ## Docker containers
 sudo docker stop $(sudo docker ps -a -q)    # stop all containers
 sudo docker rm $(sudo docker ps -a -q)    # remove all containers
+
 ```
 ```shell
 ## git local clone
 sudo rm -r ${cloudDir}/mygit/MSSE695-2022FAL8W2-Clone    # delete copied git dir
+
 ```
 ```shell
 ## Docker images
 sudo docker image prune -a -f    # remove all images
+
 ```
 ```shell
 ## Volumes
 # !!!WARNING!!! Deletes Volume content! Only do this if not trying to preserve data yet!!! (i.e.: troubleshooting initial setup)
 #sudo rm -R ${cloudDir}/datadb # !!!WARNING!!! Deletes Volume content! (i.e.: user stored database schema). Only run when needed to delete admin account and redo setup, delete/rename datadb and data dirs from Step 1
 #sudo rm -R ${cloudDir}/data # !!!WARNING!!! Deletes Volume content! (i.e.: user stored cloud files). Only run when needed to delete admin account and redo setup, delete/rename datadb and data dirs from Step 1
+
 ```
 
 2. If changing IPs is necessary, make changes to file /var/www/html/config/config.php (global IP should be added here too).
@@ -163,6 +173,7 @@ sudo docker image prune -a -f    # remove all images
 # install nano
 apt-get update
 apt-get install nano
+
 ```
 - If the following error is shown after setting up admin account and logging out "Your data directory is readable by other users" "Please change the permissions to 0770 so that the directory cannot be listed by other users", if changing permissions of the data location (both local volume dir and inside container, recommend reboot to test) does not work, the config.php can be revised again (with caution) as advised per https://github.com/nextcloud/server/blob/c364b0cb193f66ad15e2950c27113b40037d1bf6/config/config.sample.php#L747-L757
 ```shell
