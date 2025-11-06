@@ -46,6 +46,10 @@ dnf install docker-compose
 ```
 5. Other installations may be required throughout (i.e.: git); install as needed.
 ```shell
+# exports
+export mariaTag=11.8.3-noble
+```
+```shell
 # Fedora 37 Server x86_64 
 dnf install git-all
 
@@ -94,7 +98,7 @@ sudo chmod 700 ${cloudDir}/mygit/MSSE695-2022FAL8W2-Clone/nextcloud-js/dockerfil
 4. Build docker image.
 ```shell
 # exports
-export dockerTag=31.0.10-apache
+export dockerTag=32.0.1-apache
 
 ```
 ```shell
