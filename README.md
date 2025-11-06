@@ -58,11 +58,14 @@ dnf install git-all
 1. Make the required directories.
 - These directories store the files (data) and user info (datadb).  
 ```shell
+# exports
+#export cloudDir="/home/nextcloud"    #orig local dir
+export cloudDir="/media/CloudDrive/NextCloud"    #mounted drive dir
+#export cloudDir="/media/CloudDrive2025"    #new mounted drive dir
+```
+```shell
 # Ubuntu Server 18.04.6 LTS 64-bit
 # Fedora 37 Server x86_64
-#export cloudDir="/home/nextcloud"    #orig local dir
-#export cloudDir="/media/CloudDrive/NextCloud"    #mounted drive dir
-export cloudDir="/media/CloudDrive2025"    #new mounted drive dir
 sudo mkdir -p ${cloudDir}/mygit
 sudo mkdir -p ${cloudDir}/data
 sudo mkdir -p ${cloudDir}/datadb
